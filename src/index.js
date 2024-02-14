@@ -2,9 +2,11 @@ export default function getSpecial(obj) {
   const arr = [];
   const { special } = obj;
   special.forEach((item) => {
-    if (!item.description) {
-      // eslint-disable-next-line no-param-reassign
-      item.description = 'Описание недоступно';
+    if (!Object.hasOwnProperty.call(item, 'description')) {
+      Object.defineProperty(item, 'description', {
+        value: 'Описание недоступно',
+        enumerable: true,
+      });
     }
     arr.push(item);
   });
